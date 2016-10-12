@@ -51,6 +51,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.btn_plot.clicked.connect(self.parse_and_plot_button)
         self.btn_clean.clicked.connect(self.clean_plot_button)
         self.btn_accept_browse.clicked.connect(self.file_browse_accept)
+        self.btn_plot_model.clicked.connect(self.plot_model_a)
+        self.btn_clean_model.clicked.connect(self.clean_model)
 
         self.action_quit.setShortcut(QtCore.Qt.CTRL + QtCore.Qt.Key_Q)
         self.action_quit.triggered.connect(self.fileQuit)
@@ -62,6 +64,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.layout_plot.addWidget(self.navi_toolbar)
 
         self.sc2 = plotter.XMLDataMplCanvas(self, dpi=80)
+        self.sc2.clean_model()
         self.navi_toolbar2 = NavigationToolbar(self.sc2, self)
         self.layout_plot_model.addWidget(self.sc2)
         self.layout_plot_model.addWidget(self.navi_toolbar2)
@@ -140,6 +143,11 @@ class MainWindow(QtWidgets.QMainWindow):
             self.sc1.update_figure(u_load, u_str, i_load, i_str, file_name)
             self.progress_bar.setValue(idx)
 
+    def plot_model_a(self):
+
+        a = [10, 5, 7, 2, 1, 5, 7, 6]
+        self.sc2.plot_stat_graph(a)
+
     def check_list_of_files(self, files_list=[]):
         self.filtered_list = []
         for idx, x in enumerate(self.checks):
@@ -151,6 +159,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.sc1.clean_figure()
         self.progress_bar.setValue(0)
 
+    def clean_model(self):
+        self.sc2.clean_model()
+        self.progress_bar_model.setValue(0)
 
 if __name__ == "__main__":
 
