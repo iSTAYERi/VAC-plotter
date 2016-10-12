@@ -48,14 +48,20 @@ class XMLDataMplCanvas(MyMplCanvas):
         self.compute_initial_figure()
         self.draw()
 
-    def update_figure(self, u_load, u_str, i_load, i_str):
+    def update_figure(self, u_load, u_str, i_load, i_str, file_name):
 
         self.u_load = u_load
         self.i_load = i_load
 
         self.axes.hold(True)
-        self.axes.plot(self.u_load, self.i_load)
+        self.axes.plot(self.u_load, self.i_load, label=file_name)
         self.axes.set_xlabel(u_str)
         self.axes.set_ylabel(i_str)
         self.axes.grid(True)
         self.draw()
+
+    def plot_stat_graph(self, a):
+
+        self.a = a
+
+

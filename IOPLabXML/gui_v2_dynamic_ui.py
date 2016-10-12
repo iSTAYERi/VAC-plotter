@@ -123,9 +123,9 @@ class MainWindow(QtWidgets.QMainWindow):
         self.progress_bar.setMinimum(0)
         self.progress_bar.setMaximum(len(self.filtered_list) - 1)
 
-        for idx, list_of_files in enumerate(self.filtered_list):
-            file_name = self.file_path + '/' + list_of_files
-            ltex = XML_parser.XMLPloter(file_name)
+        for idx, file_name in enumerate(self.filtered_list):
+            file_name_path = self.file_path + '/' + file_name
+            ltex = XML_parser.XMLPloter(file_name_path)
 
             if self.radio_btn_frw.isChecked():
                 u_load = list(map(lambda x: float(x)*1e3, ltex.u_load))
@@ -137,7 +137,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 i_load = list(map(lambda x: float(x)*1e6, ltex.i_load))
                 u_str = 'U, V'
                 i_str = 'I, uA'
-            self.sc1.update_figure(u_load, u_str, i_load, i_str)
+            self.sc1.update_figure(u_load, u_str, i_load, i_str, file_name)
             self.progress_bar.setValue(idx)
 
     def check_list_of_files(self, files_list=[]):
