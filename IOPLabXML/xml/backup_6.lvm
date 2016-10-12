@@ -1,0 +1,41 @@
+LabVIEW Measurement	
+Writer_Version	2
+Reader_Version	2
+Separator	Tab
+Decimal_Separator	,
+Multi_Headings	Yes
+X_Columns	No
+Time_Pref	Relative
+Operator	ttyUSB0
+Date	2016/08/31
+Time	12:39:14,0492954254150390625
+***End_of_Header***	
+	
+Channels	2		
+Samples	18	18	
+Date	2016/08/31	2016/08/31	
+Time	12:39:14,0492954254150390625	12:39:14,0492954254150390625	
+X_Dimension	Time	Time	
+X0	0,0000000000000000E+0	0,0000000000000000E+0	
+Delta_X	1,000000	1,000000	
+***End_of_Header***			
+X_Value	Untitled	Untitled 1	Comment
+	0,171429	-7,566270E-8	File name example: c2089 - second batch, eighty ninth sample.\0ABogdanov S.V.
+	0,179592	-1,426967E-8
+	0,187755	5,951477E-8
+	0,195919	1,514601E-7
+	0,204082	2,743630E-7
+	0,212245	4,330262E-7
+	0,220408	6,387475E-7
+	0,228571	8,969896E-7
+	0,236735	1,215757E-6
+	0,244898	1,607317E-6
+	0,253061	2,083738E-6
+	0,261225	2,656845E-6
+	0,269388	3,340287E-6
+	0,277551	4,147306E-6
+	0,285714	5,092018E-6
+	0,293878	6,189399E-6
+	0,302041	7,456406E-6
+	0,310204	8,912842E-6
+
