@@ -116,7 +116,7 @@
       <item>
        <widget class="QTabWidget" name="tabWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="tab">
          <attribute name="title">
@@ -168,13 +168,6 @@
              <widget class="QPushButton" name="btn_clean_model">
               <property name="text">
                <string>Очистить</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QProgressBar" name="progress_bar_model">
-              <property name="value">
-               <number>0</number>
               </property>
              </widget>
             </item>

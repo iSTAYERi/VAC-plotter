@@ -40,7 +40,6 @@ class MainWindow(QtWidgets.QMainWindow):
         self.line_edit_file_path = QtWidgets.QLineEdit(self)
 
         self.progress_bar = QtWidgets.QProgressBar(self)
-        self.progress_bar_model = QtWidgets.QProgressBar(self)
 
     def __init__(self):
 
@@ -52,7 +51,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.btn_clean.clicked.connect(self.clean_plot_button)
         self.btn_accept_browse.clicked.connect(self.file_browse_accept)
         self.btn_plot_model.clicked.connect(self.plot_model_a)
-        self.btn_clean_model.clicked.connect(self.clean_model)
+        self.btn_clean_model.clicked.connect(self.clean_plot_model)
 
         self.action_quit.setShortcut(QtCore.Qt.CTRL + QtCore.Qt.Key_Q)
         self.action_quit.triggered.connect(self.fileQuit)
@@ -159,7 +158,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.sc1.clean_figure()
         self.progress_bar.setValue(0)
 
-    def clean_model(self):
+    def clean_plot_model(self):
         self.sc2.clean_model()
         self.progress_bar_model.setValue(0)
 

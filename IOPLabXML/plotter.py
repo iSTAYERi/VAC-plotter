@@ -13,7 +13,6 @@ class MyMplCanvas(FigureCanvas):
     def __init__(self, parent=None, width=5, height=4, dpi=100):
         fig = Figure(figsize=(width, height), dpi=dpi)
         self.axes = fig.add_subplot(111)
-        # We want the axes cleared every time plot() is called
         self.axes.hold(True)
 
         self.compute_initial_figure()
@@ -50,7 +49,9 @@ class XMLDataMplCanvas(MyMplCanvas):
 
     def clean_model(self):
 
-        self.axes.bar([0, 1, 2, 3, 4, 5], [1, 1, 1, 1, 1, 1])
+        self.axes.hold(False)
+        self.axes.bar([0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+                      [1, 1, 1, 1, 1, 1, 1, 1, 1, 1])
         self.axes.set_xlabel("model")
         self.axes.set_ylabel("a")
         self.draw()
