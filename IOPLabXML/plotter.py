@@ -61,6 +61,9 @@ class XMLDataMplCanvas(MyMplCanvas):
         self.u_load = u_load
         self.i_load = i_load
 
+        print(self.u_load)
+        print(self.i_load)
+
         self.axes.hold(True)
         self.axes.plot(self.u_load, self.i_load, label=file_name)
         self.axes.set_xlabel(u_str)
