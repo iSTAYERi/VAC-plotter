@@ -7,15 +7,16 @@ import matplotlib.pyplot as plt
 
 class ExpPlot:
 
-    def expFun(self, x, a, b, c):
-        return a * np.exp(b*x) + c
+    def expFun(x, a, b, c):
+        return -a * np.exp(b*x) + c
 
-#    def getExpFit(U, I):
-#        guess = [1e-9, 37, -1e-9, 1e6]
-#        params, cov = curve_fit(ExpPlot.expFun, U, I, p0=None)
-#        return params
+    def getExpFit(U, I):
+        guess = [1e-9, 37, -1e-9, 1e6]
+        params, cov = curve_fit(ExpPlot.expFun, U, I, p0=None)
+        return params
 
 if __name__ == "__main__":
+
 
     xData = [0, 8.16318378415997,
              16.3264275145331, 24.4897616474028, 32.6530279784001,
@@ -43,16 +44,22 @@ if __name__ == "__main__":
              2.69361029609643, 3.32194792347628, 4.062435304467781,
              4.92843872601548, 5.93455967908692, 7.09682948168213,
              8.43316774643858]
+    xData = list(map(lambda x: float("{:.3f}".format(x)), xData))
+    yData = list(map(lambda x: float("{:.3f}".format(x)), yData))
     xData = np.array(xData)
     yData = np.array(yData)
-    print(type(xData))
-    popt, pcov = curve_fit(ExpPlot.expFun, xData, yData)
+
+    popt = ExpPlot.getExpFit(xData, yData)
     print(popt)
+
     trialX = np.linspace(xData[0], xData[-1], 1000)
-    print(type(trialX))
     Iv = ExpPlot.expFun(trialX, *popt)
 
     plt.figure()
     plt.plot(xData, yData, 'b*')
+    plt. figure()
+    plt.plot(trialX, Iv, 'r-')
+    plt.plot(xData, yData, 'b*')
+    plt. figure()
     plt.plot(trialX, Iv, 'r-')
     plt.show()
