@@ -72,7 +72,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         directory = QtWidgets.QFileDialog.\
             getExistingDirectory(parent=self,
-                                 caption='Open catalog', directory='/home')
+                                 caption='Open catalog')
         self.line_edit_file_path.setText(directory)
 
     def file_browse_accept(self):
