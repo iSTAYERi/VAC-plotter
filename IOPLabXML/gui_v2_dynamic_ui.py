@@ -12,6 +12,7 @@ from matplotlib.backends.backend_qt5agg import (
 import XML_parser
 import plotter
 import xml_searcher
+import exp_fit
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -54,7 +55,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.btn_clean_model.clicked.connect(self.clean_plot_model)
 
         self.action_quit.setShortcut(QtCore.Qt.CTRL + QtCore.Qt.Key_Q)
-        self.action_quit.triggered.connect(self.fileQuit)
+        self.action_quit.triggered.connect(self.file_quit)
         self.action_about.triggered.connect(self.about)
 
         self.sc1 = plotter.XMLDataMplCanvas(self, width=4, height=3, dpi=80)
@@ -106,11 +107,11 @@ class MainWindow(QtWidgets.QMainWindow):
         print(self.checks)
         self.scroll_area.setWidgetResizable(True)
 
-    def fileQuit(self):
+    def file_quit(self):
         self.close()
 
     def closeEvent(self, ce):
-        self.fileQuit()
+        self.file_quit()
 
     def about(self):
         QtWidgets.QMessageBox.about(self, "Справка",
@@ -144,8 +145,23 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def plot_model_a(self):
 
-        a = [10, 5, 7, 2, 1, 5, 7, 6]
-        self.sc2.plot_stat_graph(a)
+        self.check_list_of_files(self.xsearch.list_of_files)
+        coeff_a = []
+        print(type(self.coeff_a))
+
+        for idx, file_name in enumerate(self.filtered_list):
+            file_name_path = self.file_path + '/' + file_name
+            ltex = XML_parser.XMLPloter(file_name_path)
+
+            if self.radio_btn_frw.isChecked():
+                u_load = list(map(lambda x: float(x)*1e3, ltex.u_load))
+                i_load = list(map(lambda x: float(x)*1e6, ltex.i_load))
+
+            else:
+                u_load = ltex.u_load
+                i_load = list(map(lambda x: float(x)*1e6, ltex.i_load))
+            coeff_a = coeff_a.append(exp_fit.ExpPlot.fit_and_get_coeff_a(u_load, i_load))
+        sc2.plot_stat_graph(coeff_a)
 
     def check_list_of_files(self, files_list=[]):
         self.filtered_list = []

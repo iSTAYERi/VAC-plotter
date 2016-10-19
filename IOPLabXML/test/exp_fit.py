@@ -7,16 +7,22 @@ import matplotlib.pyplot as plt
 
 class ExpPlot:
 
-    def expFun(x, a, b, c):
-        return -a * np.exp(b*x) + c
+    def _exp_fun(x, a, b):
+        return a * (np.exp(b*x)-1)
 
-    def getExpFit(U, I):
-        guess = [1e-9, 37, -1e-9, 1e6]
-        params, cov = curve_fit(ExpPlot.expFun, U, I, p0=None)
+    def _get_exp_fit(U, I):
+        guess = [1, 0.03]
+        params, cov = curve_fit(ExpPlot._exp_fun, U, I, p0=guess)
         return params
 
-if __name__ == "__main__":
+    def fit_and_get_coeff_a(xData, yData):
+        xData = np.array(xData)
+        yData = np.array(yData)
+        popt = ExpPlot._get_exp_fit(xData, yData)
+        return popt[0]
 
+
+if __name__ == "__main__":
 
     xData = [0, 8.16318378415997,
              16.3264275145331, 24.4897616474028, 32.6530279784001,
@@ -31,7 +37,8 @@ if __name__ == "__main__":
              236.73464105208, 244.89791868339, 253.06119631469997,
              261.22448524632, 269.3877289767, 277.55098400738,
              285.71425033838, 293.87750536907, 302.040805601]
-    yData = [-0.000434385204429561, -0.000308482175079974, -0.00012765332216948998,
+    yData = [-0.000434385204429561, -0.000308482175079974,
+             -0.00012765332216948998,
              0.000105342522981434, 0.000427874984622029, 0.0008645227417886511,
              0.00145742067282936, 0.00226049138991582, 0.00335875705828608,
              0.00483473181470513, 0.00684993269284055, 0.009591458616785599,
@@ -40,7 +47,8 @@ if __name__ == "__main__":
              0.08586060448374061, 0.11582402065186, 0.155696657317195,
              0.208471094053849, 0.277879026426946, 0.36846098918418496,
              0.48566316615490196, 0.6358539432379909, 0.8263171367250279,
-             1.06519405784254, 1.36141780240601, 1.72459888472152, 2.1650357713053,
+             1.06519405784254, 1.36141780240601, 1.72459888472152,
+             2.1650357713053,
              2.69361029609643, 3.32194792347628, 4.062435304467781,
              4.92843872601548, 5.93455967908692, 7.09682948168213,
              8.43316774643858]
@@ -50,16 +58,19 @@ if __name__ == "__main__":
     yData = np.array(yData)
 
     popt = ExpPlot.getExpFit(xData, yData)
-    print(popt)
+#    poptR = ExpPlot.getExpFitR(xData, yData)
+#    print(popt)
 
     trialX = np.linspace(xData[0], xData[-1], 1000)
     Iv = ExpPlot.expFun(trialX, *popt)
+#    IvR = ExpPlot.expFunR(trialX, *poptR)
 
-    plt.figure()
-    plt.plot(xData, yData, 'b*')
+#    plt.figure()
+#    plt.plot(xData, yData, 'b*')
     plt. figure()
     plt.plot(trialX, Iv, 'r-')
     plt.plot(xData, yData, 'b*')
-    plt. figure()
-    plt.plot(trialX, Iv, 'r-')
+#    plt.plot(trialX, IvR, 'g--')
+#    plt. figure()
+#    plt.plot(trialX, Iv, 'r-')
     plt.show()
