@@ -9,7 +9,7 @@ import matplotlib
 from matplotlib.backends.backend_qt5agg import (
     NavigationToolbar2QT as NavigationToolbar)
 
-import XML_parser.XMLPloter
+import XML_parser
 import plotter
 import xml_searcher
 import exp_fit
@@ -19,7 +19,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def init_variables(self):
 
-        self.vertical_layout_scroll = QtWidgets.QVBoxLayout(self)
+        self.form_layout_scroll = QtWidgets.QFormLayout(self)
         self.layout_plot = QtWidgets.QVBoxLayout(self)
         self.layout_plot_model = QtWidgets.QVBoxLayout(self)
 
@@ -87,7 +87,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.xsearch = xml_searcher.XmlSearcher(self.file_path,
                                                 VAC_type_forward)
 
-        self.crean_layout(self.vertical_layout_scroll)
+        self.crean_layout(self.form_layout_scroll)
         self.add_checkboxes()
 
 # Функция, удаляющая виджеты из layout'ов.
@@ -97,11 +97,12 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def add_checkboxes(self):
         self.checks = []
-        for i in self.xsearch.list_of_files:
+        for idx, i in enumerate(self.xsearch.list_of_files):
             c = QtWidgets.QCheckBox("%s" % i)
             c.setCheckState(True)
             c.setTristate(False)
-            self.vertical_layout_scroll.addWidget(c)
+            lab = QtWidgets.QLabel("0%")
+            self.form_layout_scroll.addRow(c, lab)
             self.checks.append(c)
 
         print(self.checks)
