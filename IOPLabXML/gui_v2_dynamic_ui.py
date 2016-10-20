@@ -9,7 +9,7 @@ import matplotlib
 from matplotlib.backends.backend_qt5agg import (
     NavigationToolbar2QT as NavigationToolbar)
 
-import XML_parser
+import XML_parser.XMLPloter
 import plotter
 import xml_searcher
 import exp_fit
@@ -136,7 +136,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 u_str = 'U, mV'
                 i_str = 'I, uA'
             else:
-                u_load = ltex.u_load
+                u_load = list(map(lambda x: float(x), ltex.u_load))
                 i_load = list(map(lambda x: float(x)*1e6, ltex.i_load))
                 u_str = 'U, V'
                 i_str = 'I, uA'
@@ -147,7 +147,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.check_list_of_files(self.xsearch.list_of_files)
         coeff_a = []
-        print(type(self.coeff_a))
+        print(type(coeff_a))
 
         for idx, file_name in enumerate(self.filtered_list):
             file_name_path = self.file_path + '/' + file_name
@@ -158,10 +158,12 @@ class MainWindow(QtWidgets.QMainWindow):
                 i_load = list(map(lambda x: float(x)*1e6, ltex.i_load))
 
             else:
-                u_load = ltex.u_load
+                u_load = list(map(lambda x: float(x), ltex.u_load))
                 i_load = list(map(lambda x: float(x)*1e6, ltex.i_load))
-            coeff_a = coeff_a.append(exp_fit.ExpPlot.fit_and_get_coeff_a(u_load, i_load))
-        sc2.plot_stat_graph(coeff_a)
+                # print(u_load)
+                # print(i_load)
+            coeff_a.append(exp_fit.ExpPlot.fit_and_get_coeff_a(u_load, i_load))
+        self.sc2.plot_stat_graph(coeff_a)
 
     def check_list_of_files(self, files_list=[]):
         self.filtered_list = []
@@ -176,7 +178,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def clean_plot_model(self):
         self.sc2.clean_model()
-        self.progress_bar_model.setValue(0)
+        # self.progress_bar_model.setValue(0)
 
 if __name__ == "__main__":
 

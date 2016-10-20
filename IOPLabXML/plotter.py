@@ -73,9 +73,9 @@ class XMLDataMplCanvas(MyMplCanvas):
 
     def plot_stat_graph(self, a):
 
-        b = [n + 1 for n in len(a)]
+        b = [idx + 1 for idx, n in enumerate(a)]
 
-        self.axes.bar(b, self.a)
+        self.axes.bar(b, a)
         self.axes.set_xlabel("model")
         self.axes.set_ylabel("a")
         self.draw()
