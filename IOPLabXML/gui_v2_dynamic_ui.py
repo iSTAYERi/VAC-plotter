@@ -13,6 +13,7 @@ import XML_parser
 import plotter
 import xml_searcher
 import exp_fit
+from strings import *
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -26,6 +27,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.scroll_area = QtWidgets.QScrollArea(self)
         self.action_quit = QtWidgets.QAction(self)
         self.action_about = QtWidgets.QAction(self)
+        self.action_help = QtWidgets.QAction(self)
 
         self.btn_browse = QtWidgets.QPushButton(self)
         self.btn_plot = QtWidgets.QPushButton(self)
@@ -57,6 +59,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.action_quit.setShortcut(QtCore.Qt.CTRL + QtCore.Qt.Key_Q)
         self.action_quit.triggered.connect(self.file_quit)
         self.action_about.triggered.connect(self.about)
+        self.action_help.triggered.connect(self.help)
 
         self.sc1 = plotter.XMLDataMplCanvas(self, width=4, height=3, dpi=80)
         self.navi_toolbar = NavigationToolbar(self.sc1, self)
@@ -71,7 +74,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def file_browse(self):
 
-        directory = QtWidgets.QFileDialog.\
+        directory = QtWidgets.QFileDialog. \
             getExistingDirectory(parent=self,
                                  caption='Open catalog')
         self.line_edit_file_path.setText(directory)
@@ -90,7 +93,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.crean_layout(self.form_layout_scroll)
         self.add_checkboxes()
 
-# Функция, удаляющая виджеты из layout'ов.
+    # Функция, удаляющая виджеты из layout'ов.
     def crean_layout(self, layout):
         for i in reversed(range(layout.count())):
             layout.itemAt(i).widget().setParent(None)
@@ -115,8 +118,10 @@ class MainWindow(QtWidgets.QMainWindow):
         self.file_quit()
 
     def about(self):
-        QtWidgets.QMessageBox.about(self, "Справка",
-                                    "...---...ФЦП №117...---...")
+        QtWidgets.QMessageBox.about(self, "О Программе", ABOUT)
+
+    def help(self):
+        QtWidgets.QMessageBox.information(self, "Help", HELP)
 
     def parse_and_plot_button(self):
         u_str = ''
@@ -171,7 +176,7 @@ class MainWindow(QtWidgets.QMainWindow):
         for idx, x in enumerate(self.checks):
             if x.isChecked():
                 self.filtered_list.append(files_list[idx])
-#        print("Enabled files: ", self.filtered_list)
+                #        print("Enabled files: ", self.filtered_list)
 
     def clean_plot_button(self):
         self.sc1.clean_figure()
