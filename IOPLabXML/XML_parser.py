@@ -65,10 +65,10 @@ class XMLPloter:
                              self.xmlns_fol('DBL') +
                              self.xmlns_fol('Val'))
 
-        print("Количество нодов 'V': " + str(len(nodes_V)))
-        print("Количество нодов 'I': " + str(len(nodes_I)))
+        # print("Количество нодов 'V': " + str(len(nodes_V)))
+        # print("Количество нодов 'I': " + str(len(nodes_I)))
 
-        print("------------------")
+        # print("------------------")
 
         for x in nodes_V:
             self.u_load.append(x.text)

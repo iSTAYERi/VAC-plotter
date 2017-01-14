@@ -166,8 +166,6 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 u_load = list(map(lambda x: float(x), ltex.u_load))
                 i_load = list(map(lambda x: float(x)*1e6, ltex.i_load))
-                # print(u_load)
-                # print(i_load)
             coeff_a.append(exp_fit.ExpPlot.fit_and_get_coeff_a(u_load, i_load))
         self.sc2.plot_stat_graph(coeff_a)
 

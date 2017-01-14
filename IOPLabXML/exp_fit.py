@@ -19,4 +19,15 @@ class ExpPlot:
         yData = np.array(yData)
 
         popt = ExpPlot._get_exp_fit(xData, yData)
-        return float(popt[1])
+
+        ExpPlot.print_coeffs(float(popt[0]), float(popt[1]))
+
+        return float(popt[0])
+
+    def print_coeffs(a, b):
+
+        # print("коэффициент А = ")
+        print(a)
+
+        # print("коэффициент B = ")
+        # print(b)
